@@ -39,13 +39,13 @@ var w2utils = (function () {
         version  : '1.4.x',
         settings : {
             "locale"            : "en-us",
-            "date_format"       : "m/d/yyyy",
+            "date_format"       : "d/m/yy",
             "date_display"      : "Mon d, yyyy",
-            "time_format"       : "h12",
+            "time_format"       : "h24",
             "currencyPrefix"    : "$",
             "currencySuffix"    : "",
             "currencyPrecision" : 2,
-            "groupSymbol"       : ",",
+            "groupSymbol"       : "",
             "shortmonths"       : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             "fullmonths"        : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             "shortdays"         : ["M", "T", "W", "T", "F", "S", "S"],
@@ -167,13 +167,13 @@ var w2utils = (function () {
             if (tmp2 === 'yyyy/mm/dd') { month = tmp[1]; day = tmp[2]; year = tmp[0]; }
             if (tmp2 === 'yyyy/m/d')   { month = tmp[1]; day = tmp[2]; year = tmp[0]; }
             if (tmp2 === 'mm/dd/yy')   { month = tmp[0]; day = tmp[1]; year = tmp[2]; }
-            if (tmp2 === 'm/d/yy')     { month = tmp[0]; day = tmp[1]; year = parseInt(tmp[2]) + 1900; }
-            if (tmp2 === 'dd/mm/yy')   { month = tmp[1]; day = tmp[0]; year = parseInt(tmp[2]) + 1900; }
-            if (tmp2 === 'd/m/yy')     { month = tmp[1]; day = tmp[0]; year = parseInt(tmp[2]) + 1900; }
-            if (tmp2 === 'yy/dd/mm')   { month = tmp[2]; day = tmp[1]; year = parseInt(tmp[0]) + 1900; }
-            if (tmp2 === 'yy/d/m')     { month = tmp[2]; day = tmp[1]; year = parseInt(tmp[0]) + 1900; }
-            if (tmp2 === 'yy/mm/dd')   { month = tmp[1]; day = tmp[2]; year = parseInt(tmp[0]) + 1900; }
-            if (tmp2 === 'yy/m/d')     { month = tmp[1]; day = tmp[2]; year = parseInt(tmp[0]) + 1900; }
+            if (tmp2 === 'm/d/yy')     { month = tmp[0]; day = tmp[1]; year = parseInt(tmp[2]) + 2000; }
+            if (tmp2 === 'dd/mm/yy')   { month = tmp[1]; day = tmp[0]; year = parseInt(tmp[2]) + 2000; }
+            if (tmp2 === 'd/m/yy')     { month = tmp[1]; day = tmp[0]; year = parseInt(tmp[2]) + 2000; }
+            if (tmp2 === 'yy/dd/mm')   { month = tmp[2]; day = tmp[1]; year = parseInt(tmp[0]) + 2000; }
+            if (tmp2 === 'yy/d/m')     { month = tmp[2]; day = tmp[1]; year = parseInt(tmp[0]) + 2000; }
+            if (tmp2 === 'yy/mm/dd')   { month = tmp[1]; day = tmp[2]; year = parseInt(tmp[0]) + 2000; }
+            if (tmp2 === 'yy/m/d')     { month = tmp[1]; day = tmp[2]; year = parseInt(tmp[0]) + 2000; }
         }
         if (!isInt(year)) return false;
         if (!isInt(month)) return false;
@@ -322,7 +322,7 @@ var w2utils = (function () {
             .replace('mon', w2utils.settings.shortmonths[month])
             .replace(/yyyy/g, year)
             .replace(/yyy/g, year)
-            .replace(/yy/g, year > 2000 ? 100 + parseInt(String(year).substr(2)) : String(year).substr(2))
+            .replace(/yy/g, year > 2000 ? parseInt(String(year).substr(2)) : String(year).substr(2))
             .replace(/(^|[^a-z$])y/g, '$1' + year)             // only y's that are not preceeded by a letter
             .replace(/mm/g, (month + 1 < 10 ? '0' : '') + (month + 1))
             .replace(/dd/g, (date < 10 ? '0' : '') + date)
@@ -5791,7 +5791,7 @@ w2utils.keyboard = (function (obj) {
                 if (['enum'].indexOf(s.type) != -1) {
                     var operator =  '<select id="grid_'+ this.name +'_operator_'+ i +'" onclick="event.stopPropagation();">'+
                         '    <option value="in">'+ w2utils.lang('in') +'</option>'+
-                        '    <option value="in">'+ w2utils.lang('not in') +'</option>'+
+                        '    <option value="not in">'+ w2utils.lang('not in') +'</option>'+
                         '</select>';
                 }
                 html += '<tr>'+
